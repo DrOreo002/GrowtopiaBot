@@ -3,6 +3,14 @@
 # GrowtopiaBot
 A simple growtopia bot! made by Growtopia Noobs
 
+# Features
+Currently this bot has a few features that you can try via
+in game chat!  
+
+> !follow (Bot will follow you)
+> !stop (Stop following)
+
+And few others thats not important
 # About
 This is actually not made by me (DrOreo002) but I've edited the source so it will be compatible without QT and you can  
 compile it using Visual Studio  
