@@ -1,3 +1,5 @@
+[Imgur](https://i.imgur.com/ZenOkVu.png)
+
 # GrowtopiaBot
 A simple growtopia bot! made by Growtopia Noobs
 
