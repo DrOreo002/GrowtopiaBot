@@ -1,0 +1,12 @@
+﻿  CPPBot.cpp
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\corefunc.h(820): warning C4101: 'e': unreferenced local variable
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\corefunc.h(1162): warning C4018: '<': signed/unsigned mismatch
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\corefunc.h(1260): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\utilsfunc.h(178): warning C4018: '<': signed/unsigned mismatch
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(227): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(228): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(406): warning C4018: '<': signed/unsigned mismatch
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(425): warning C4018: '<': signed/unsigned mismatch
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(531): warning C4102: 'NO_OWNER_MESSAGE': unreferenced label
+c:\users\anom\desktop\growtopiabot\cppbot\cppbot\userfunc.h(546): warning C4018: '<': signed/unsigned mismatch
+  CPPBot.vcxproj -> C:\Users\Anom\Desktop\GrowtopiaBot\CPPBot\Debug\CPPBot.exe
