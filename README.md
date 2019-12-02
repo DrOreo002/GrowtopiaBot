@@ -19,6 +19,7 @@ compile it using Visual Studio
 
 # Usage
 Afer you compiled the source, you can directly run the .exe file and specify the path for your bot data.
+or you can directly run the debug .exe inside the Debug folder  
 
 **Bot data example**  
 ```json
