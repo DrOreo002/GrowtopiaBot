@@ -1,4 +1,4 @@
-[![GrowtopiaBot](https://raw.githubusercontent.com/droreo002/growtopiabot/icon.png)](https://github.com/DrOreo002/GrowtopiaBot)
+[![GrowtopiaBot](https://github.com/DrOreo002/GrowtopiaBot/blob/master/icon.png)](https://github.com/DrOreo002/GrowtopiaBot)
 
 # GrowtopiaBot
 A simple growtopia bot! made by Growtopia Noobs
