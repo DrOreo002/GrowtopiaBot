@@ -1,6 +1,6 @@
 [![GrowtopiaBot](https://github.com/DrOreo002/GrowtopiaBot/blob/master/icon.png)](https://github.com/DrOreo002/GrowtopiaBot)
 
-# GrowtopiaBot
+# GrowtopiaBot (https://github.com/GrowtopiaNoobs/Growtopia-Bot)
 A simple growtopia bot! made by Growtopia Noobs
 
 # Features
