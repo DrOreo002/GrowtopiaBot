@@ -15,6 +15,8 @@ Afer you compiled the source, you can directly run the .exe file and specify the
   "password": "LMAO",
   "gameVersion": "2.999",
   "targetWorld": "DROREOITEM",
-  "publicOwnership": "true" // Experimental
+  "publicOwnership": "true"
 }
 ```
+Also be aware that ownership is experimental. Sometimes it work, sometimes it dont. But I'll not release  
+a fix here since I'm currently making my own bot in Java  
