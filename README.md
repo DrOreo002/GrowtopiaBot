@@ -26,9 +26,9 @@ or you can directly run the debug .exe inside the Debug folder
 {
   "username": "HelloWorld",
   "password": "LMAO",
-  "gameVersion": "2.999",
+  "gameVersion": "3.01",
   "targetWorld": "DROREOITEM",
-  "publicOwnership": "true"
+  "publicOwnership": true
 }
 ```
 Also be aware that ownership is experimental. Sometimes it work, sometimes it dont. But I'll not release  
