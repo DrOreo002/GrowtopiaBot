@@ -24,10 +24,10 @@ or you can directly run the debug .exe inside the Debug folder
 **Bot data example**  
 ```json
 {
-  "username": "HelloWorld",
-  "password": "LMAO",
-  "gameVersion": "3.01",
-  "targetWorld": "DROREOITEM",
+  "username": "Dirgahayu",
+  "password": "Indonesia75Tahun",
+  "gameVersion": "3.011",
+  "targetWorld": "BALI",
   "publicOwnership": true
 }
 ```
