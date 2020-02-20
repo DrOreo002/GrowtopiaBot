@@ -42,7 +42,7 @@ int main() {
 	if (!exists_test(botDataPath)) {
 		cout << "Please specify your bot data path... [Json]" << endl;
 		cin >> botDataPath;
-		return;
+		return 0;
 	}
 	cout << "Loading bot data..." << botDataPath << endl;
 

@@ -1,2 +1,4 @@
 bot.json
-Debug
+Debug/
+CPPBot/Debug/
+.vs
