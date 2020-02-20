@@ -27,8 +27,7 @@ or you can directly run the debug .exe inside the Debug folder
   "username": "Dirgahayu",
   "password": "Indonesia75Tahun",
   "gameVersion": "3.011",
-  "targetWorld": "BALI",
-  "publicOwnership": true
+  "targetWorld": "INDONESIA"
 }
 ```
 Also be aware that ownership is experimental. Sometimes it work, sometimes it dont. But I'll not release  
