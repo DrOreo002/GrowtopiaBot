@@ -26,12 +26,14 @@
 
 using namespace std;
 
+string SERVER_HOST = "209.59.191.76";
+int SERVER_PORT = 17093;
+
 /*********  hidden vars  ********/
 class GrowtopiaBot {
 public:
 	ENetPeer *peer;
 	ENetHost * client;
-
 
 	int login_user = 0;
 	int login_token = 0;
@@ -39,12 +41,13 @@ public:
 	string currentWorld;
 	int timeFromWorldEnter = 0; // in 10mss...
 
-	string gameVersion = "2.98";
+	string gameVersion = "3.011";
 	/*********  hidden vars  ********/
 
 
 	/********** user sutff ***************/
 	int owner = -1;
+	string ownerUsername;
 
 	struct ObjectData
 	{
@@ -69,9 +72,8 @@ public:
 	string uname;
 	string upass;
 	string worldName; // excepted world name
-	boolean publicOwnership = false;
-	bool isFollowing = false;
 
+	bool isFollowing = false;
 	bool backwardWalk = false;
 
 	int respawnX;
@@ -180,8 +182,14 @@ public:
 		}
 	}
 
+	// Connect with default value
+	void connectClient() {
+		connectClient(SERVER_HOST, SERVER_PORT);
+	}
+
 	void connectClient(string hostName, int port)
 	{
+		cout << "Connecting bot to " << hostName << ":" << port << endl;
 		client = enet_host_create(NULL /* create a client host */,
 			1 /* only allow 1 outgoing connection */,
 			2 /* allow up 2 channels to be used, 0 and 1 */,

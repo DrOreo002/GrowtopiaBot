@@ -22,6 +22,10 @@
 #include <math.h>
 #include <string>
 #include <iostream>
+#include <regex>
+#include <iterator>
+#include <algorithm>
+
 #include "utilsfunc.h"
 #include "corefunc.h"
 #include "userfunc.h"
@@ -78,6 +82,12 @@ string generateRid()
 	return x;
 }
 
+string stripMessage(string msg) {
+	regex e("\\x60[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]\\{};':\"\\\\|,.<>\\/?]");
+	string result = regex_replace(msg, e, "");
+	return result; // Why it is so hard to replace?
+}
+
 void GrowtopiaBot::onLoginRequested()
 {
 	cout << "Logging on..." << endl;
@@ -110,7 +120,7 @@ void GrowtopiaBot::packet_type3(string text)
 	}
 	if (text.find("action|logon_fail") != string::npos)
 	{
-		connectClient("209.59.190.105", 17096);
+		connectClient();
 		objects.clear();
 		currentWorld = "";
 	}
@@ -137,26 +147,9 @@ void GrowtopiaBot::OnSendToServer(string address, int port, int userId, int toke
 }
 
 void GrowtopiaBot::OnConsoleMessage(string message) {
-	if (message.find("`` left, `w") != string::npos)
-	{
-		string::size_type loc = message.find("`` left,", 0);
-		//SendPacket(2, "action|input\n|text|" + colorstr2(message.substr(3, loc) + " just left"), peer);
-	}
-	else if (message.find("`` entered, `w") != string::npos)
-	{
-		string::size_type loc = message.find("`` entered,", 0);
-		//SendPacket(2, "action|input\n|text|" + colorstr2(message.substr(3, loc) + " just joined"), peer);
-	}
-	if (message.find("hello") != string::npos)
-	{
-		if (message.find("bot") != string::npos)
-		{
-			SendPacket(2, "action|input\n|text|" + colorstr2("I am not bot!!"), peer);
-		}
-		else {
-			SendPacket(2, "action|input\n|text|" + colorstr2("Hi man!"), peer);
-		}
-	}
+	cout << "Found console message: " << endl;
+	cout << stripMessage(message) << endl;
+	cout << "------------------------" << endl;
 }
 
 void GrowtopiaBot::OnPlayPositioned(string sound)
@@ -263,17 +256,8 @@ void GrowtopiaBot::SetHasAccountSecured(int state)
 
 void GrowtopiaBot::OnTalkBubble(int netID, string bubbleText, int type)
 {
-	if (bubbleText.find("!owner") != string::npos && publicOwnership)
-	{
-		for (ObjectData x : objects)
-		{
-			if (netID == x.netId)
-			{
-				SendPacket(2, "action|input\n|text|Owner is " + x.name + ".", peer);
-				owner = netID;
-			}
-		}
-	}
+	// Check if owner here
+	cout << bubbleText << endl;
 	if (bubbleText.find("!pos") != string::npos && netID == owner)
 	{
 		for (ObjectData x : objects)
@@ -444,7 +428,7 @@ void GrowtopiaBot::WhenConnected()
 void GrowtopiaBot::WhenDisconnected()
 {
 	cout << "Disconnected from server..." << endl;
-	connectClient("209.59.190.105", 17096);
+	connectClient();
 }
 
 int counter = 0; // 10ms per step
@@ -532,9 +516,8 @@ NO_OWNER_MESSAGE:
 	return;
 }
 
-void GrowtopiaBot::userInit()
-{
-	connectClient("209.59.191.86", 17093);
+void GrowtopiaBot::userInit() {
+	connectClient();
 	cout << flush;
 }
 
