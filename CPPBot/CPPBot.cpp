@@ -38,10 +38,11 @@ int main() {
 	init();
 	cout << "GrowtopiaBot v1.0 [Not included QT]! by GrowtopiaNoobs and DrOreo002" << endl;
 
-	string botDataPath = "C:\\Users\\Anom\\Desktop\\GrowtopiaBot\\bot.json";
+	string botDataPath = "bot.json";
 	if (!exists_test(botDataPath)) {
 		cout << "Please specify your bot data path... [Json]" << endl;
 		cin >> botDataPath;
+		return;
 	}
 	cout << "Loading bot data..." << botDataPath << endl;
 
