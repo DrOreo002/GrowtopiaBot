@@ -3,15 +3,12 @@
 # GrowtopiaBot (https://github.com/GrowtopiaNoobs/Growtopia-Bot)
 A simple growtopia bot! made by Growtopia Noobs
 
-# Features
-Currently this bot has a few features that you can try via
-in game chat!  
+# Commands
+Commands are curently owner only, so owner must enter the same world as the bot to work
 
 > !follow (Bot will follow you)  
 > !stop (Stop following)
-
-And few others thats not important. You can take a look by your self in the source code.  
-just scroll down a bit..  
+> !about (Show about message)
 
 # About
 This is actually not made by me (DrOreo002) but I've edited the source so it will be compatible without QT and you can  
@@ -27,7 +24,8 @@ or you can directly run the debug .exe inside the Debug folder
   "username": "Dirgahayu",
   "password": "Indonesia75Tahun",
   "gameVersion": "3.011",
-  "targetWorld": "INDONESIA"
+  "targetWorld": "INDONESIA",
+  "ownerUsername": "DrOreo002"
 }
 ```
 Also be aware that ownership is experimental. Sometimes it work, sometimes it dont. But I'll not release  
