@@ -28,5 +28,3 @@ or you can directly run the debug .exe inside the Debug folder
   "ownerUsername": "DrOreo002"
 }
 ```
-Also be aware that ownership is experimental. Sometimes it work, sometimes it dont. But I'll not release  
-a fix here since I'm currently making my own bot in Java  
