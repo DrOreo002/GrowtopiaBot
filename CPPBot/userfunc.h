@@ -85,7 +85,8 @@ string generateRid()
 string stripMessage(string msg) {
 	regex e("\\x60[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]\\{};':\"\\\\|,.<>\\/?]");
 	string result = regex_replace(msg, e, "");
-	return result; // Why it is so hard to replace?
+	result.erase(std::remove(result.begin(), result.end(), '`'), result.end());
+	return result;
 }
 
 void GrowtopiaBot::onLoginRequested()
@@ -148,7 +149,13 @@ void GrowtopiaBot::OnSendToServer(string address, int port, int userId, int toke
 
 void GrowtopiaBot::OnConsoleMessage(string message) {
 	cout << "Found console message: " << endl;
-	cout << stripMessage(message) << endl;
+	string strippedMessage = stripMessage(message);
+	cout << strippedMessage << endl;
+
+	if (strippedMessage.find("MSG") != std::string::npos) {
+		cout << "Found message!" << endl;
+	}
+
 	cout << "------------------------" << endl;
 }
 
@@ -194,6 +201,8 @@ void GrowtopiaBot::OnSpawn(string data)
 	std::string to;
 	cout << data;
 	ObjectData objectData;
+	bool actuallyOwner = false;
+
 	while (std::getline(ss, to, '\n')) {
 		string id = to.substr(0, to.find("|"));
 		string act = to.substr(to.find("|") + 1, to.length() - to.find("|") - 1);
@@ -203,10 +212,12 @@ void GrowtopiaBot::OnSpawn(string data)
 		}
 		else if (id == "name")
 		{
+			if (stripMessage(act) == ownerUsername) actuallyOwner = true;
 			objectData.name = act;
 		}
 		else if (id == "netID")
 		{
+			if (actuallyOwner) owner = atoi(act.c_str());
 			objectData.netId = atoi(act.c_str());
 		}
 		else if (id == "userID")
@@ -230,11 +241,9 @@ void GrowtopiaBot::OnSpawn(string data)
 			cout << "Some fishy boy is here: " << objectData.name << "; " << objectData.country << "; " << objectData.userId << "; " << objectData.netId << "; " << endl;
 			objectData.isMod = true;
 		}
-		else {
-			dbgPrint(id + "!!!!!!!!!!!" + act);
-		}
-
 	}
+
+	if (actuallyOwner) cout << "Owner netID has been updated to " << objectData.netId << " username is " << ownerUsername;
 	objects.push_back(objectData);
 	//SendPacket(2, "action|input\n|text|`3Hello " + name + " `3with id " + netid + " from " + country + "! Your Growtopia ID is "+uid, peer);
 }
@@ -256,9 +265,9 @@ void GrowtopiaBot::SetHasAccountSecured(int state)
 
 void GrowtopiaBot::OnTalkBubble(int netID, string bubbleText, int type)
 {
-	// Check if owner here
+	if (netID != owner) return;
 	cout << bubbleText << endl;
-	if (bubbleText.find("!pos") != string::npos && netID == owner)
+	if (bubbleText.find("!pos") != string::npos)
 	{
 		for (ObjectData x : objects)
 		{
@@ -268,50 +277,21 @@ void GrowtopiaBot::OnTalkBubble(int netID, string bubbleText, int type)
 			}
 		}
 	}
-	if (bubbleText.find("!playercount") != string::npos && netID == owner)
-	{
-		int i = 0;
-		for (ObjectData x : objects)
-		{
-			if (!x.isGone)
-			{
-				i++;
-			}
-		}
-		SendPacket(2, "action|input\n|text|There is " + std::to_string(i) + " players.", peer);
-	}
-	if (bubbleText.find("!follow") != string::npos && netID == owner)
+	if (bubbleText.find("!follow") != string::npos)
 	{
 		isFollowing = true;
 	}
-	if (bubbleText.find("!stop") != string::npos && netID == owner)
+	if (bubbleText.find("!stop") != string::npos)
 	{
 		isFollowing = false;
 	}
-	if (bubbleText.find("!dance") != string::npos && netID == owner)
+	if (bubbleText.find("!dance") != string::npos)
 	{
 		SendPacket(2, "action|input\n|text|/dance", peer);
 	}
-	if (bubbleText.find("!!") != string::npos && netID == owner)
-	{
-#ifndef WORLD_GO
-		if (bubbleText.find("!/go") == string::npos && bubbleText.find("!/rgo") == string::npos && netID == owner)
-#endif
-		{
-			SendPacket(2, "action|input\n|text|" + bubbleText.substr(bubbleText.find("!!") + 2, bubbleText.length() - bubbleText.find("!!")), peer);
-			worldName = "";
-		}
-	}
 	if (bubbleText.find("!about") != string::npos || bubbleText.find("!help") != string::npos)
 	{
-		SendPacket(2, "action|input\n|text|This is bot from Growtopia Noobs. Subscribe him on youtube!", peer);
-	}
-	if (bubbleText.find("!go ") != string::npos && netID == owner)
-	{
-#ifdef WORLD_GO
-		SendPacket(3, "action|join_request\nname|" + bubbleText.substr(bubbleText.find("!go ") + 4, bubbleText.length() - bubbleText.find("!go ")), peer);
-		worldName = bubbleText.substr(bubbleText.find("!go ") + 4, bubbleText.length() - bubbleText.find("!go "));
-#endif
+		SendPacket(2, "action|input\n|text|This is bot from Growtopia Noobs. Modified my DrOreo002", peer);
 	}
 }
 
@@ -491,29 +471,7 @@ void GrowtopiaBot::userLoop() {
 				ownerY = x.y;
 			}
 		}
-		if (owner != -1)
-		{
-			/*for (ObjectData x : objects)
-			{
-				if (((x.x - ownerX)*(x.x - ownerX)) + ((x.y - ownerY)*(x.y - ownerY)) < distance && x.netId != owner && !x.isGone)
-				{
-					distance = ((x.x - ownerX)*(x.x - ownerX)) + ((x.y - ownerY)*(x.y - ownerY)); // just dont calculate squere root = faster
-					name = x.name;
-				}
-				if(x.netId==owner && x.isGone)
-					goto NO_OWNER_MESSAGE;
-			}
-			if (distance == std::numeric_limits<float>::infinity())
-			{
-				SendPacket(2, "action|input\n|text|There are no other players:(", peer);
-			}
-			else {
-				SendPacket(2, "action|input\n|text|Closest player is " + name + " with distance " + std::to_string(sqrt(distance)), peer);
-			}*/
-		}
 	}
-NO_OWNER_MESSAGE:
-	return;
 }
 
 void GrowtopiaBot::userInit() {

@@ -40,15 +40,17 @@ int main() {
 		j["username"], j["password"]
 	};
 	cout << "------------------------" << endl;
-	cout << "Bot loaded!. Using username " << j["username"] << endl;
+	cout << "Bot loaded!. Using username " << j["username"].get<string>() << ", With owner " + j["ownerUsername"].get<string>() << endl;
 
 	bot.gameVersion = j["gameVersion"].get<string>();
 	bot.worldName = j["targetWorld"].get<string>();
+	bot.ownerUsername = j["ownerUsername"].get<string>();
 
 	bot.userInit();
 	bots.push_back(bot);
 
 	while (true) {
 		bot.eventLoop();
+		bot.userLoop();
 	}
 }
