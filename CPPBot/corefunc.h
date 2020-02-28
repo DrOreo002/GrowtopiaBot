@@ -460,7 +460,14 @@ public:
 					{
 						dataStruct = (BYTE*)new OnAddNotificationStruct;
 					} /*else*/ {
-						dbgPrint("String found at " + std::to_string((int)index) + ": " + v);
+						if (v.find("`wAre you Human?``") != string::npos) 
+						{
+							cout << "Found captcha!" << endl;
+						}
+						else 
+						{
+							dbgPrint("String found at " + std::to_string((int)index) + ": " + v);
+						}
 					}
 				}
 				if (action == "OnSendToServer" && index == 4)
