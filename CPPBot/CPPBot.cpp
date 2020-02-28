@@ -26,8 +26,7 @@ int main() {
 
 	string botDataPath = "H:\\anom\\CPP Project\\GrowtopiaBot\\bot.json";
 	if (!exists_test(botDataPath)) {
-		cout << "Please specify your bot data path... [Json]" << endl;
-		cin >> botDataPath;
+		cout << "Cannot find bot data on that path!. Stuck?, please read README.md" << endl;
 		return 0;
 	}
 	cout << "Loading bot data on path (" << botDataPath << ")" << endl;

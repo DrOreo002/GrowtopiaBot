@@ -15,8 +15,12 @@ This is actually not made by me (DrOreo002) but I've edited the source so it wil
 compile it using Visual Studio  
 
 # Usage
-Afer you compiled the source, you can directly run the .exe file and specify the path for your bot data.
-or you can directly run the debug .exe inside the Debug folder  
+It should be easy to build this, but apparently visual studio wouldn't allow you to. Because sometimes thing could go wrong
+so I'd recommend to use **Visual Studio 2017** because its the version that I'm currently using
+
+1. Change this [line](https://github.com/DrOreo002/GrowtopiaBot/blob/master/CPPBot/CPPBot.cpp#L27) to your exact path of the `.json` make sure you have double slash
+2. Build in debug mode or release, up to you
+3. Enjoy
 
 **Bot data example**  
 ```json
