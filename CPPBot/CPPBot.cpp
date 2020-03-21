@@ -9,6 +9,10 @@
 #include "corefunc.h"
 #include "userfunc.h"
 #include "json.hpp"
+#include <string>
+#include <windows.h>
+#include <direct.h>
+#define GetCurrentDir _getcwd
 
 using namespace std;
 using json = nlohmann::json;
@@ -23,8 +27,16 @@ inline bool exists_test(const string& name) {
 int main() {
 	init();
 	cout << "GrowtopiaBot v1.0 [Not included QT]! by GrowtopiaNoobs and DrOreo002" << endl;
+	char cCurrentPath[FILENAME_MAX];
 
-	string botDataPath = "H:\\anom\\CPP Project\\GrowtopiaBot\\bot.json";
+	if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+	{
+		return errno;
+	}
+
+	cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+	string botDataPath = cCurrentPath + string("\\bot.json");
+
 	if (!exists_test(botDataPath)) {
 		cout << "Cannot find bot data on that path!. Stuck?, please read README.md" << endl;
 		return 0;
